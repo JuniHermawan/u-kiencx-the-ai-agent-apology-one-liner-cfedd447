@@ -21,6 +21,9 @@ LINE = (
 
 
 def main() -> None:
+    # Gate guard: the sealed scorer only accepts 1-159 UTF-8 characters.
+    if not 1 <= len(LINE) <= 159 or not LINE.strip():
+        raise SystemExit("entry line must be 1-159 non-blank characters")
     out_dir = os.environ.get("OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
